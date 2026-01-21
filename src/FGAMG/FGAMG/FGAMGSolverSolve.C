@@ -557,7 +557,7 @@ const
 	if (startContainsGaussSeidel != endContainsGaussSeidel) {
         	FatalErrorInFunction << "Smoother mismatch specified in solution file. \n"
 		<< "Please retry with selections from " << smootherList  
-		<< " that belong to the family." << exit(FatalError);
+		<< " that belong to the same family." << exit(FatalError);
 	}
 	// Flips bounds if specified in unexpected order
 	else if (startingIndex > endingIndex) {
