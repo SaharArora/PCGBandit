@@ -34,6 +34,8 @@ namespace Foam
     dictionary preconditionerDict;
     dictionary subDict;
     HashTable<List<dictionary>> preconditionerDictsMap;
+    HashTable<SymmetricSquareMatrix<scalar>> similarityMatrixMap;
+    HashTable<scalarField> columnSumsMap;
     dictionary learningDicts;
 
     // --- GAMG configuration space specification and defaults
@@ -242,8 +244,6 @@ Foam::PCGBandit::PCGBandit
         Info<< "Preconditioner configurations for " << banditName_ << " : " << preconditionerDictsMap[banditName_] << endl;
         #endif
 
-	// --- Build similarity Matrix
-	similarityMatrix_ = preconditionerSimilarityMatrix(preconditionerDictsMap[banditName_]);
     }
 }
 
@@ -282,6 +282,7 @@ void Foam::PCGBandit::queryLearner
         Info<< "Static Preconditioner: ";
         #endif
     }
+
 
     subDict = preconditionerDicts[i];
     preconditionerDict.set("preconditioner", subDict);
